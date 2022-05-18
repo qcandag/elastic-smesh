@@ -23,8 +23,17 @@ router.get('/', function(req, res, next) {
       if (err){
           console.log(err);
       }else {
-        const resArray = []
-          res.send( "-- [0] --" + response.body.hits.hits[0]._source.description + " \n \n -- [1] -- " + response.body.hits.hits[1]._source.description);
+        let hits = [];
+        hits.append(response.hits.hits);
+        if (hits.length > 0){
+            res.send(hits);
+        }else{
+            console.log("No hits"); 
+        }
+
+        // res.send( "-- [0] --" + response.body.hits.hits[0]._source.description );
+        
+            
       }
     });
 });
